@@ -33,6 +33,7 @@ for ref in ${IMAGES_TO_CHECK[@]}; do
     podman pull -q "$ref" > /dev/null
   fi
 
+  printf "Digest: $(skopeo inspect --raw "docker://$ref" | sha256sum | awk '{print $1}')\n"
   printf "Created: $(skopeo inspect --no-tags "docker://$ref" | jq -r .Created)\n"
 
   # The args should be a list of rpm versions that have the particular vulernability
