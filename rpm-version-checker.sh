@@ -51,8 +51,12 @@ for ref in ${IMAGES_TO_CHECK[@]}; do
     printf "* Want $want or better\n"
 
     if [ -z $have ]; then
-      # If it's not installed we're safe
-      printf "  Not installed or wrong package name $YELLOW\n"
+      # If it's not installed we might be all clear, but we might have one of the
+      # other rpms from the build, e.g. sqlite-libs, or krb5-libs.
+      # (Note: It would be possible to find all the rpms, e.g. something like this:
+      #   rpm -qa --qf '%{NVR} %{SOURCERPM}\n' | grep " $package_name" | awk '{print $1}'
+      # but let's save that fun for another day)
+      printf "  Not installed or wrong package name. Maybe try $package_name-libs..? $YELLOW\n"
 
     else
       # Use rpmdev-vercmp to correctly compare the rpm versions
