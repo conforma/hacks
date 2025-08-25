@@ -15,8 +15,8 @@ set -o pipefail
 
 IMAGES_TO_CHECK=(
   quay.io/conforma/cli:latest
+  registry.redhat.io/rhtas/ec-rhel9:0.7
   registry.redhat.io/rhtas/ec-rhel9:0.6
-  registry.redhat.io/rhtas/ec-rhel9:0.5
   registry.access.redhat.com/ubi9/ubi-minimal:latest
 )
 

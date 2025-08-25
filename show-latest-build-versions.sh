@@ -11,7 +11,7 @@ FAST="${FAST:-""}"
 VERBOSE="${VERBOSE:-""}"
 
 # Update as required when we cut a new release or stop maintaining an old release
-RH_TAGS="${1:-"0.5 0.6 latest"}"
+RH_TAGS="${1:-"0.6 0.7 latest"}"
 
 _show_details() {
 	local title="$1"
@@ -75,7 +75,7 @@ _show_details() {
 # Built and pushed by Konflux from a release branch
 # (This is shipped to customers with RHTAS)
 for t in ${RH_TAGS}; do
-	[[ $t == "latest" ]] && ver="v06" || ver="v${t/./}"
+	[[ $t == "latest" ]] && ver="v07" || ver="v${t/./}"
 	_show_details "Red Hat Build ($t)" "registry.redhat.io/rhtas/ec-rhel9:${t}" "$ver"
 done
 
