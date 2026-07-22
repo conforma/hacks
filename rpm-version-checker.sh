@@ -18,8 +18,6 @@ IMAGES_TO_CHECK=(
   registry.redhat.io/rhtas/ec-rhel9:0.8
   registry.redhat.io/rhtas/ec-rhel9:0.7
   registry.access.redhat.com/ubi9/ubi-minimal:latest
-  # ubi-micro is used by golden-image
-  registry.access.redhat.com/ubi9/ubi-micro:latest
 )
 
 RED="\e[31m✘\e[0m"
