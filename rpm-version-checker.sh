@@ -15,8 +15,8 @@ set -o pipefail
 
 IMAGES_TO_CHECK=(
   quay.io/conforma/cli:latest
+  registry.redhat.io/rhtas/ec-rhel9:0.8
   registry.redhat.io/rhtas/ec-rhel9:0.7
-  registry.redhat.io/rhtas/ec-rhel9:0.6
   registry.access.redhat.com/ubi9/ubi-minimal:latest
   # ubi-micro is used by golden-image
   registry.access.redhat.com/ubi9/ubi-micro:latest
