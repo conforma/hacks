@@ -26,6 +26,11 @@ RED="\e[31m✘\e[0m"
 GREEN="\e[32m✔\e[0m"
 YELLOW="\e[33m✔\e[0m"
 
+if ! command -v rpmdev-vercmp &>/dev/null; then
+  printf "Error: rpmdev-vercmp not found. Install it with: sudo dnf install rpmdevtools\n"
+  exit 1
+fi
+
 for ref in ${IMAGES_TO_CHECK[@]}; do
   printf "🛠️ $ref\n"
 
