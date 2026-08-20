@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-
-set -o errexit
-set -o nounset
-set -o pipefail
+set -euo pipefail
 
 #
 # Often we need to confirm what versions of a particular rpm exist in each build
@@ -13,11 +10,11 @@ set -o pipefail
 #   ./rpm-version-checker.sh libarchive-3.5.3-5.el9_6 krb5-libs-1.21.1-8.el9_6 pam-1.5.1-25.el9_6
 #
 
+# The ubi base image, the (usually 2) release branch builds, and the main branch build
 IMAGES_TO_CHECK=(
-  quay.io/conforma/cli:latest
-  registry.redhat.io/rhtas/ec-rhel9:0.8
-  registry.redhat.io/rhtas/ec-rhel9:0.7
   registry.access.redhat.com/ubi9/ubi-minimal:latest
+  $(./current-release-tags.sh | xargs -I{} echo registry.redhat.io/rhtas/ec-rhel9:{})
+  quay.io/conforma/cli:latest
 )
 
 RED="\e[31m✘\e[0m"
