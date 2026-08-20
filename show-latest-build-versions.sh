@@ -85,9 +85,3 @@ _show_details "Main branch Konflux build" "quay.io/conforma/cli:latest" "main"
 
 # Built/pushed by GitHub from main branch. Not deprecated, but :latest is preferred.
 _show_details "Main branch GitHub build" "quay.io/conforma/cli:snapshot"
-
-# Built/pushed by Konflux from main branch (old repo). Deprecated.
-_show_details "Main branch Konflux build (old location)" "quay.io/enterprise-contract/cli:latest" "main"
-
-# Built/pushed by GitHub from main branch (old repo). Deprecated
-_show_details "Main branch GitHub build (old location)" "quay.io/enterprise-contract/ec-cli:snapshot"
