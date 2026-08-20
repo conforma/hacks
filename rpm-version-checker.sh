@@ -61,6 +61,16 @@ report_status() {
   esac
 }
 
+# Turn an ISO timestamp into a rough "N days ago" for readability.
+time_ago() {
+  local secs=$(( $(date +%s) - $(date -d "$1" +%s) ))
+  if   (( secs < 3600 ));   then echo "$(( secs / 60 )) minutes ago"
+  elif (( secs < 86400 ));  then echo "$(( secs / 3600 )) hours ago"
+  elif (( secs < 604800 )); then echo "$(( secs / 86400 )) days ago"
+  else                           echo "$(( secs / 604800 )) weeks ago"
+  fi
+}
+
 for ref in ${IMAGES_TO_CHECK[@]}; do
   printf "🛠️ $ref\n"
 
@@ -72,7 +82,8 @@ for ref in ${IMAGES_TO_CHECK[@]}; do
 
   # Output some useful info about the image we're investigating
   printf "Digest: $(skopeo inspect --raw "docker://$ref" | sha256sum | awk '{print $1}')\n"
-  printf "Created: $(skopeo inspect --no-tags "docker://$ref" | jq -r .Created)\n"
+  created=$(skopeo inspect --no-tags "docker://$ref" | jq -r .Created)
+  printf "Created: $created ($(time_ago "$created"))\n"
 
   # List every installed rpm as "name NVR sourcerpm", e.g.
   #   krb5-libs krb5-libs-1.21.1-10.el9_8 krb5-1.21.1-10.el9_8.src.rpm
