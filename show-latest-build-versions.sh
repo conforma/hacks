@@ -10,8 +10,7 @@ FAST="${FAST:-""}"
 # Set this for verbose output
 VERBOSE="${VERBOSE:-""}"
 
-# Update as required when we cut a new release or stop maintaining an old release
-RH_TAGS="${1:-"0.7 0.8"}"
+RH_TAGS="${1:-$(./current-release-tags.sh)}"
 
 _show_details() {
 	local title="$1"
