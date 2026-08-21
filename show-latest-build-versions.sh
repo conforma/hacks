@@ -10,8 +10,7 @@ FAST="${FAST:-""}"
 # Set this for verbose output
 VERBOSE="${VERBOSE:-""}"
 
-# Update as required when we cut a new release or stop maintaining an old release
-RH_TAGS="${1:-"0.7 0.8 latest"}"
+RH_TAGS="${1:-$(./current-release-tags.sh)}"
 
 _show_details() {
 	local title="$1"
@@ -75,7 +74,7 @@ _show_details() {
 # Built and pushed by Konflux from a release branch
 # (This is shipped to customers with RHTAS)
 for t in ${RH_TAGS}; do
-	[[ $t == "latest" ]] && ver="v08" || ver="v${t/./}"
+	ver="v${t/./}"
 	_show_details "Red Hat Build ($t)" "registry.redhat.io/rhtas/ec-rhel9:${t}" "$ver"
 done
 
@@ -85,9 +84,3 @@ _show_details "Main branch Konflux build" "quay.io/conforma/cli:latest" "main"
 
 # Built/pushed by GitHub from main branch. Not deprecated, but :latest is preferred.
 _show_details "Main branch GitHub build" "quay.io/conforma/cli:snapshot"
-
-# Built/pushed by Konflux from main branch (old repo). Deprecated.
-_show_details "Main branch Konflux build (old location)" "quay.io/enterprise-contract/cli:latest" "main"
-
-# Built/pushed by GitHub from main branch (old repo). Deprecated
-_show_details "Main branch GitHub build (old location)" "quay.io/enterprise-contract/ec-cli:snapshot"
